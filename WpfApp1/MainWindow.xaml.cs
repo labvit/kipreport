@@ -15,6 +15,11 @@ using System.Windows.Shapes;
 
 namespace WpfApp1
 {
+    struct Point
+    {
+        float x;
+        float y;
+    }
     interface IDrawCanvas
     {
         void addLine(DrawLine l);
@@ -23,24 +28,55 @@ namespace WpfApp1
     }
     abstract class DrawShape
     {
-        public abstract void DrawTo();
+        public abstract void DrawTo(IDrawCanvas canvas);
     }
 
-    class DrawCircle : DrawShape { }
-    class DrawBox : DrawShape { }
-    class DrawLine : DrawShape
+    class DrawCircle : DrawShape
     {
-        public override void DrawTo()
+        public override void DrawTo(IDrawCanvas canvas)
         {
-            throw new NotImplementedException();
+            canvas.addCircle(this);
         }
     }
-    class ShapeGroup { }
-    class Object2d { }
+    class DrawBox : DrawShape
+    {
+        public override void DrawTo(IDrawCanvas canvas)
+        {
+            canvas.addRectangle(this);
+        }
+    }
+    class DrawLine : DrawShape
+    {
+        public Point Start;
+        public Point End;
+        public override void DrawTo(IDrawCanvas canvas)
+        {
+            canvas.addLine(this);
+        }
+    }
+    class Style
+    {
+        public Color Color;
+        public float Width;
+    }
+    class ShapeGroup {
+    
+    }
+    class Object2d 
+    {
+        public bool Selected;
+        public List<Shape> Shapes;
+    }
 
     class Scene
     {
-
+        List<Object2d> Objects;
+        public Object2d newObject()
+        {
+            var o = new Object2d();
+            Objects.Add(o);
+            return o;
+        }
     }
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml

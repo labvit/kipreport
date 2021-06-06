@@ -58,7 +58,9 @@ namespace WpfApp1
             try
             {
                 var point = e.GetPosition(ViewEditor);
+                point = Img.PointToScreen(point);
                 Img.Scene.SelectObject(point);
+                Img.BuildScene(Img.Scene);
             }
             catch(Exception)
             {

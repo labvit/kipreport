@@ -63,6 +63,7 @@
     <Compile Include="DrawShape.cs" />
     <Compile Include="IDrawCanvas.cs" />
     <Compile Include="IStyle.cs" />
+    <Compile Include="Model.cs" />
     <Compile Include="Object2d.cs" />
     <Compile Include="Scene.cs" />
     <Compile Include="Style.cs" />

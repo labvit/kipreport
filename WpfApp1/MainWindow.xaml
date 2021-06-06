@@ -8,11 +8,25 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="300"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        
-        <local:Viewer2DControl x:Name="Img"/>
-        <Button Grid.Row="1"/>
+        <ListView Grid.Row="0" ItemsSource="{Binding View2dList}" >
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <local:Viewer2DControl Scene="{Binding Scene}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Canvas x:Name="ViewEditor" Grid.Row="1" MouseLeftButtonDown="SelectClick">
+        <local:Viewer2DControl  x:Name="Img"/>
+        </Canvas>
+        <Button Grid.Row="2"/>
     </Grid>
 </Window>

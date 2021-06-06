@@ -53,6 +53,9 @@ namespace WpfApp1
         {
             _CGD = new GeometryDrawing();
             var Brush = new SolidColorBrush(ob.Style.Color);
+
+            if (ob.Selected)
+                Brush = new SolidColorBrush(Colors.Blue);
             _CGD.Pen = new Pen(Brush, ob.Style.Width);
             
             _CGG = new GeometryGroup();

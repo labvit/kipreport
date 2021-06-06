@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 
 namespace WpfApp1
@@ -47,6 +48,24 @@ namespace WpfApp1
         {
             foreach (var o in Objects)
                 o.ScaleTo((float)scale);
+        }
+
+        internal void SelectObject(Point point)
+        {
+            double area = 1e10;
+            Object2d minArOb = null;
+            foreach(var ob in Objects)
+            {
+                var bb = ob.BoundBox;
+                if (bb.Contains(point))
+                    if (area > bb.Height * bb.Width)
+                    {
+                        area = bb.Height * bb.Width;
+                        minArOb = ob;
+                    }
+            }
+            if (minArOb != null)
+                minArOb.Selected = true;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,6 @@ using System.Windows.Shapes;
 
 namespace WpfApp1
 {
-    
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
@@ -24,6 +24,7 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
             Object2d o = new Object2d();
             o.Style = new Style(Colors.Black, 3);
             o.Shapes = new List<DrawShape>();
@@ -33,7 +34,36 @@ namespace WpfApp1
             sc.Objects = new List<Object2d>();
             sc.Objects.Add(o);
 
+            o = new Object2d();
+            o.Style = new Style(Colors.Red, 3);
+            o.Shapes = new List<DrawShape>();
+            o.Shapes.Add(new DrawLine { Start = new DrawPoint(), End = new DrawPoint { x = 300, y = 350 } });
+            o.Shapes.Add(new DrawCircle { Center = new DrawPoint { x = 150, y = 50 }, R = 50 });
+            sc.Objects.Add(o);
+            
             Img.Scene = sc;
+            View2dList.Add(new Model { Scene = sc });
+            View2dList.Add(new Model { Scene = sc });
+            View2dList.Add(new Model { Scene = sc });
+        }
+        public ObservableCollection<Model> View2dList { get; set; } = new ObservableCollection<Model>();
+
+        private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            
+        }
+
+        private void SelectClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                var point = e.GetPosition(ViewEditor);
+                Img.Scene.SelectObject(point);
+            }
+            catch(Exception)
+            {
+
+            }
         }
     }
 }

@@ -15,69 +15,7 @@ using System.Windows.Shapes;
 
 namespace WpfApp1
 {
-    struct Point
-    {
-        float x;
-        float y;
-    }
-    interface IDrawCanvas
-    {
-        void addLine(DrawLine l);
-        void addCircle(DrawCircle c);
-        void addRectangle(DrawBox b);
-    }
-    abstract class DrawShape
-    {
-        public abstract void DrawTo(IDrawCanvas canvas);
-    }
-
-    class DrawCircle : DrawShape
-    {
-        public override void DrawTo(IDrawCanvas canvas)
-        {
-            canvas.addCircle(this);
-        }
-    }
-    class DrawBox : DrawShape
-    {
-        public override void DrawTo(IDrawCanvas canvas)
-        {
-            canvas.addRectangle(this);
-        }
-    }
-    class DrawLine : DrawShape
-    {
-        public Point Start;
-        public Point End;
-        public override void DrawTo(IDrawCanvas canvas)
-        {
-            canvas.addLine(this);
-        }
-    }
-    class Style
-    {
-        public Color Color;
-        public float Width;
-    }
-    class ShapeGroup {
     
-    }
-    class Object2d 
-    {
-        public bool Selected;
-        public List<Shape> Shapes;
-    }
-
-    class Scene
-    {
-        List<Object2d> Objects;
-        public Object2d newObject()
-        {
-            var o = new Object2d();
-            Objects.Add(o);
-            return o;
-        }
-    }
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
@@ -86,6 +24,16 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
+            Object2d o = new Object2d();
+            o.Style = new Style(Colors.Black, 3);
+            o.Shapes = new List<DrawShape>();
+            o.Shapes.Add(new DrawLine { Start = new DrawPoint(), End = new DrawPoint { x = 100, y = 100 } });
+            o.Shapes.Add(new DrawCircle { Center = new DrawPoint { x = 150, y = 150 }, R = 50 });
+            Scene sc = new Scene();
+            sc.Objects = new List<Object2d>();
+            sc.Objects.Add(o);
+
+            Img.Scene = sc;
         }
     }
 }

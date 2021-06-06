@@ -56,6 +56,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DrawBox.cs" />
+    <Compile Include="DrawCircle.cs" />
+    <Compile Include="DrawLine.cs" />
+    <Compile Include="DrawPoint.cs" />
+    <Compile Include="DrawShape.cs" />
+    <Compile Include="IDrawCanvas.cs" />
+    <Compile Include="IStyle.cs" />
+    <Compile Include="Object2d.cs" />
+    <Compile Include="Scene.cs" />
+    <Compile Include="Style.cs" />
+    <Compile Include="Viewer2DControl.xaml.cs">
+      <DependentUpon>Viewer2DControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfCanvasWrapper.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,6 +82,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Viewer2DControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

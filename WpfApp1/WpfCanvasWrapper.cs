@@ -9,6 +9,7 @@ namespace WpfApp1
         DrawingGroup _DG;
         GeometryDrawing _CGD = null;
         GeometryGroup _CGG = null;
+        DrawPoint ObLocation;
         public WpfCanvasWrapper(DrawingImage canvas)
         {
             _Canvas = canvas;
@@ -19,7 +20,7 @@ namespace WpfApp1
         {
             if (_CGG != null)
             {
-                var circle = new EllipseGeometry(new Point(c.Center.x,c.Center.y), c.R,c.R);
+                var circle = new EllipseGeometry(new Point(c.Center.x + ObLocation.x, c.Center.y+ObLocation.y), c.R,c.R);
                 _CGG.Children.Add(circle);
             }
         }
@@ -28,7 +29,7 @@ namespace WpfApp1
         {
             if(_CGG != null)
             {
-                var line = new LineGeometry(new Point(l.Start.x, l.Start.y), new Point(l.End.x, l.End.y));
+                var line = new LineGeometry(new Point(l.Start.x+ObLocation.x, l.Start.y+ObLocation.y), new Point(l.End.x + ObLocation.x, l.End.y + ObLocation.y));
                 _CGG.Children.Add(line);
             }
         }
@@ -38,8 +39,8 @@ namespace WpfApp1
             if(_CGG != null)
             {
                 var r = new Rect();
-                r.X = b.Start.x;
-                r.Y = b.Start.y;
+                r.X = b.Start.x + ObLocation.x;
+                r.Y = b.Start.y + ObLocation.y;
                 r.Width = b.End.x - b.Start.x;
                 r.Height = b.End.y - b.Start.y;
 
@@ -53,7 +54,7 @@ namespace WpfApp1
         {
             _CGD = new GeometryDrawing();
             var Brush = new SolidColorBrush(ob.Style.Color);
-
+            ObLocation = ob.Location;
             if (ob.Selected)
                 Brush = new SolidColorBrush(Colors.Blue);
             _CGD.Pen = new Pen(Brush, ob.Style.Width);
@@ -67,6 +68,8 @@ namespace WpfApp1
             _DG.Children.Add(_CGD);
             _CGG = null;
             _CGD = null;
+            ObLocation.x = 0e0f;
+            ObLocation.y = 0e0f;
         }
 
         public float Height

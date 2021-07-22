@@ -16,5 +16,10 @@ namespace WpfApp1
             Center.x *= scale;
             R *= scale;
         }
+
+        internal override bool Contains(Point p)
+        {
+            return (Center.x - p.X) * (Center.x - p.X) + (Center.y - p.Y) * (Center.y - p.Y) <= R * R + Zero;
+        }
     }
 }

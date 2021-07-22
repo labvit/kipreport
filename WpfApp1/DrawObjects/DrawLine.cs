@@ -23,5 +23,16 @@ namespace WpfApp1
             Start *= scale;
             End *= scale;
         }
+
+        internal override bool Contains(Point p)
+        {
+            var line = End - Start;
+            var pp =  p - Start;
+            var pl = Math.Sqrt(DrawPoint.dot(pp, pp));
+            var ll = Math.Sqrt(DrawPoint.dot(line,line )) ;
+            return Math.Abs(DrawPoint.dot(pp, line) / (pl * ll) - 1e0) <= Zero
+                && pl <= ll + Zero;
+                ;
+        }
     }
 }

@@ -56,20 +56,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DrawBox.cs" />
-    <Compile Include="DrawCircle.cs" />
-    <Compile Include="DrawLine.cs" />
-    <Compile Include="DrawPoint.cs" />
-    <Compile Include="DrawShape.cs" />
-    <Compile Include="IDrawCanvas.cs" />
-    <Compile Include="IStyle.cs" />
+    <Compile Include="DrawObjects\DrawBox.cs" />
+    <Compile Include="DrawObjects\DrawCircle.cs" />
+    <Compile Include="DrawObjects\DrawLine.cs" />
+    <Compile Include="DrawObjects\DrawPoint.cs" />
+    <Compile Include="DrawObjects\DrawShape.cs" />
+    <Compile Include="DrawObjects\IDrawCanvas.cs" />
+    <Compile Include="DrawObjects\IStyle.cs" />
     <Compile Include="Model.cs" />
-    <Compile Include="Object2d.cs" />
-    <Compile Include="Scene.cs" />
-    <Compile Include="Style.cs" />
-    <Compile Include="Viewer2DControl.xaml.cs">
+    <Compile Include="DrawObjects\Object2d.cs" />
+    <Compile Include="DrawObjects\Scene.cs" />
+    <Compile Include="DrawObjects\Style.cs" />
+    <Compile Include="DrawObjects\Viewer2DControl.xaml.cs">
       <DependentUpon>Viewer2DControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ObjectProperties\Property.cs" />
+    <Compile Include="ObjectProperties\PropertyManager.cs" />
+    <Compile Include="ObjectProperties\PropertyRecord.cs" />
     <Compile Include="WpfCanvasWrapper.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -83,7 +86,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Viewer2DControl.xaml">
+    <Page Include="DrawObjects\Viewer2DControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

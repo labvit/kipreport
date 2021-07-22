@@ -36,9 +36,8 @@ namespace WpfApp1
 
             o = new Object2d();
             o.Style = new Style(Colors.Red, 3);
-            o.Shapes = new List<DrawShape>();
-            o.Shapes.Add(new DrawLine { Start = new DrawPoint(), End = new DrawPoint { x = 300, y = 350 } });
-            o.Shapes.Add(new DrawCircle { Center = new DrawPoint { x = 150, y = 50 }, R = 50 });
+            o.Shapes = sc.Objects.Last().Shapes;
+            o.Location.y = 100;
             sc.Objects.Add(o);
             
             Img.Scene = sc;
@@ -57,9 +56,13 @@ namespace WpfApp1
         {
             try
             {
-                var point = e.GetPosition(ViewEditor);
-                point = Img.PointToScreen(point);
-                Img.Scene.SelectObject(point);
+                var point = e.GetPosition(Img);
+                //point = Img. PointToScreen(point);
+                if(Keyboard.Modifiers == ModifierKeys.Control)
+                    Img.Scene.UnselectObject(point);
+                else
+                    Img.Scene.SelectObject(point);
+
                 Img.BuildScene(Img.Scene);
             }
             catch(Exception)

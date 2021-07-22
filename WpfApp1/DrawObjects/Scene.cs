@@ -22,6 +22,17 @@ namespace WpfApp1
             
         }
 
+        public void MoveSelected(Point vec)
+        {
+            foreach (var ob in Objects)
+                if (ob.Selected)
+                {
+                    ob.Location.x += (float) vec.X;
+                    ob.Location.y += (float)vec.Y;
+                }
+
+        }
+
         internal Rect BoundBox
         {
             get
@@ -50,22 +61,36 @@ namespace WpfApp1
                 o.ScaleTo((float)scale);
         }
 
-        internal void SelectObject(Point point)
+        private Object2d findObject(Point p)
         {
             double area = 1e10;
             Object2d minArOb = null;
-            foreach(var ob in Objects)
+            foreach (var ob in Objects)
             {
                 var bb = ob.BoundBox;
-                if (bb.Contains(point))
+                if (bb.Contains(p) )
+                    if(ob.Contains(p))
                     if (area > bb.Height * bb.Width)
                     {
                         area = bb.Height * bb.Width;
                         minArOb = ob;
                     }
             }
-            if (minArOb != null)
-                minArOb.Selected = true;
+            return minArOb;
+        }
+
+        internal void SelectObject(Point point)
+        {
+            var ob = findObject(point);
+            if (ob != null)
+                ob.Selected = true;
+        }
+
+        internal void UnselectObject(Point point)
+        {
+            var ob = findObject(point);
+            if (ob != null)
+                ob.Selected = false;
         }
     }
 }

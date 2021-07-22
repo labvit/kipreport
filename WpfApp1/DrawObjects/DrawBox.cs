@@ -24,5 +24,10 @@ namespace WpfApp1
             Start *= scale;
             End *= scale;
         }
+
+        internal override bool Contains(Point p)
+        {
+            return p.X >= Start.x - Zero && p.X < End.x + Zero && p.Y <= End.y + Zero && p.X < End.x + Zero;
+        }
     }
 }

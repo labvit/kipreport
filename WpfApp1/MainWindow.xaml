@@ -25,7 +25,7 @@
             </ListView.ItemTemplate>
         </ListView>
         <Canvas x:Name="ViewEditor" Grid.Row="1" MouseLeftButtonDown="SelectClick">
-        <local:Viewer2DControl  x:Name="Img"/>
+        <local:Viewer2DControl  Canvas.Right="100"  x:Name="Img"/>
         </Canvas>
         <Button Grid.Row="2"/>
     </Grid>
